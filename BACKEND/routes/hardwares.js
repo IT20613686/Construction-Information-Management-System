@@ -6,24 +6,24 @@ const Mongoose = require('mongoose');
 let Hardware = require("../models/hardware");
 
 //image upload
-// const storage = multer.diskStorage ({
-//     destination : (req, file, cb) => {
-//         cb(null, 'uploads');
-//     },
+const storage = multer.diskStorage ({
+    destination : (req, file, cb) => {
+        cb(null, 'uploads');
+    },
 
-//     filename : (req,file,cb) => {
-//         cb(null, Date.now() + file.originalname)
-//     }
+    filename : (req,file,cb) => {
+        cb(null, Date.now() + file.originalname)
+    }
     
-// });
+});
 
-// const upload = multer({
-//     storage:storage,
+const upload = multer({
+    storage:storage,
     
-// }).single('image')
+}).single('image')
 
 
-router.post('/add', async(req,res)=>{
+router.post('/add', upload, async(req,res)=>{
 
     const newHardware = new Hardware({
 
@@ -32,7 +32,7 @@ router.post('/add', async(req,res)=>{
         address: req.body.address,
         contact: req.body.contact,
         email: req.body.email,
-        // image: req.file.filename,
+        image: req.file.filename,
         
     })
 
@@ -59,15 +59,15 @@ router.post('/add', async(req,res)=>{
         newHardware.hardwareID = `HID${numberToString}`
 
     newHardware.save().then(()=>{
-        // alert('Hardware added successfully');
-        // res.redirect('http://localhost:3000/add');
-        res.status(200).send({status: "Hardware added"})
+        alert('Hardware added successfully');
+        res.redirect('http://localhost:3000/add');
+        // res.status(200).send({status: "Hardware added"})
 
     }).catch((err)=>{
-        // alert('Hardware already exists');
-        // res.redirect('http://localhost:3000/add');
-        console.log(err);
-        res.status(500).send({status: "Error with adding hardware", error: err.message});
+        alert('Hardware already exists');
+        res.redirect('http://localhost:3000/add');
+        // console.log(err);
+        // res.status(500).send({status: "Error with adding hardware", error: err.message});
     })
 
 })
@@ -84,7 +84,36 @@ router.route("/view").get((req,res)=>{
 
 
 
+router.route("/update/:id").put(async(req,res)=>{
+    let hardwareId = req.params.id;
+    const {address} = req.body;
+    const {contact} = req.body;
 
+    const Update = {
+        address,
+        contact,
+    }
+
+    const update = await Hardware.findByIdAndUpdate(hardwareId, Update).then(()=>{
+        res.status(200).send({status: "Hardware updated"})
+    }).catch((err)=>{
+        console.log(err);
+        res.status(500).send({status: "Error with updating hardware", error: err.message});
+    })
+})
+
+
+
+router.route("/delete/:id").delete(async(req,res)=>{
+    const id = req.params.id;
+
+    await Hardware.findByIdAndRemove(id).exec().then(()=>{
+        res.status(200).send({status: "Hardware deleted"})
+        
+    }).catch((err)=>{
+        res.status(500).send({status: "Error with deleting hardware", error: err.message});
+    })
+})
 
 
 module.exports = router;
