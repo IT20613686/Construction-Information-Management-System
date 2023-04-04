@@ -28,7 +28,7 @@ function Header() {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                <Link class="nav-link navText" aria-current="page" href="#">
+                <Link class="nav-link navText" aria-current="page" to='/dashboard'>
                   Dashboard
                 </Link>
               </li>
