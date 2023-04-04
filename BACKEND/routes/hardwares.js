@@ -60,12 +60,12 @@ router.post('/add', upload, async(req,res)=>{
 
     newHardware.save().then(()=>{
         alert('Hardware added successfully');
-        res.redirect('http://localhost:3000/add');
+        res.redirect('http://localhost:3000/addHardware');
         // res.status(200).send({status: "Hardware added"})
 
     }).catch((err)=>{
         alert('Hardware already exists');
-        res.redirect('http://localhost:3000/add');
+        res.redirect('http://localhost:3000/addHardware');
         // console.log(err);
         // res.status(500).send({status: "Error with adding hardware", error: err.message});
     })
@@ -84,8 +84,8 @@ router.route("/view").get((req,res)=>{
 
 
 
-router.route("/update/:id").put(async(req,res)=>{
-    let hardwareId = req.params.id;
+router.route("/update/:ID").put(async(req,res)=>{
+    let hardwareId = req.body.ID;
     const {address} = req.body;
     const {contact} = req.body;
 
