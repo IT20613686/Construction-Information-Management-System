@@ -53,6 +53,7 @@ function AddHardware() {
                   name="contact"
                   className="addInput"
                   placeholder="Contact No"
+                  pattern="[0]{1}[0-9]{9}"
                   required
                   autocomplete="off"
                 />
@@ -62,7 +63,7 @@ function AddHardware() {
                   type="email"
                   id="email"
                   name="email"
-                  className='addInput'
+                  className="addInput"
                   placeholder="Email Address"
                   required
                   autocomplete="off"

@@ -12,7 +12,6 @@ const hardwareSchema = new Schema({
         type : String,
         required : true,
         unique: true,
-
     },
     address : {
         type : String,
@@ -21,12 +20,10 @@ const hardwareSchema = new Schema({
     contact : {
         type : Number,
         required : true,
-        unique : true
     },
     email : {
         type: String,
         required: true,
-        unique : true
     },
     image : {
         type : String,

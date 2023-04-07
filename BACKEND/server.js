@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 const app = express();
 require("dotenv").config();
 
-// app.use('/uploads', express.static('./uploads'));
+app.use('/uploads', express.static('./uploads'));
 
 const PORT = process.env.PORT || 8070;
 
@@ -29,8 +29,10 @@ connection.once('open', () => {
 })
 
 const hardwareRouter = require("./routes/hardwares.js");
+const hardwareItemRouter = require("./routes/hardwareItems.js")
 
-app.use("/hardware",hardwareRouter);
+app.use("/hardware", hardwareRouter);
+app.use("/hardwareItem", hardwareItemRouter);
 
 app.listen(PORT, () => {
     console.log('Server is up and running on port number:' + PORT)
