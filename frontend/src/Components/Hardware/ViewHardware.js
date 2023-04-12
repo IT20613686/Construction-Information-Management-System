@@ -4,9 +4,15 @@ import axios from 'axios'
 import { EditHardware } from './EditHardware';
 import { ViewHardwareTable } from './ViewHardwareTable';
 import './ViewHardware.css'
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 function ViewHardware() {
+
+  let navigate = useNavigate();
+  const routeChange = () => {
+    let path = `/hardware-report`;
+    navigate(path);
+  };
 
      const [hardwares, setHardwares] = useState([]);
      const [q, setQ] = useState("");
@@ -100,7 +106,9 @@ function ViewHardware() {
       <div className="body">
         <br />
         <div className="hardwareBtn">
-          <Link to='/addHardware' class="btn">+ ADD</Link>
+          <Link to="/addHardware" class="btn">
+            + ADD
+          </Link>
         </div>
 
         <div className="search-container">
@@ -112,7 +120,6 @@ function ViewHardware() {
             onChange={(e) => setQ(e.target.value)}
           />
         </div>
-
         <form onSubmit={updateData}>
           <table className="table">
             <thead>
@@ -132,7 +139,9 @@ function ViewHardware() {
                   if (q === "") {
                     return hardware;
                   } else if (
-                    hardware.hardwareName.toLowerCase().includes(q.toLowerCase())
+                    hardware.hardwareName
+                      .toLowerCase()
+                      .includes(q.toLowerCase())
                   ) {
                     return hardware;
                   }
@@ -157,6 +166,11 @@ function ViewHardware() {
             </tbody>
           </table>
         </form>
+        <div className="reportBtn">
+          <button onClick={routeChange} className="btn">
+            REPORT
+          </button>
+        </div>
       </div>
     </div>
   );
