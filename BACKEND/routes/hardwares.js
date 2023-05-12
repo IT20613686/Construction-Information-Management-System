@@ -1,8 +1,6 @@
 const router = require("express").Router();
 const multer = require('multer');
-const path = require('path');
 const alert = require('alert');
-const Mongoose = require('mongoose');
 let Hardware = require("../models/hardware");
 
 //image upload
@@ -59,15 +57,11 @@ router.post('/add', upload, async(req,res)=>{
         newHardware.hardwareID = `HID${numberToString}`
 
     newHardware.save().then(()=>{
-        alert('Hardware added successfully');
-        res.redirect('http://localhost:3000/addHardware');
-        // res.status(200).send({status: "Hardware added"})
+        res.status(200).send({status: "Hardware added"})
 
     }).catch((err)=>{
-        alert('Hardware already exists');
-        res.redirect('http://localhost:3000/addHardware');
-        // console.log(err);
-        // res.status(500).send({status: "Error with adding hardware", error: err.message});
+        console.log(err);
+        res.status(500).send({status: "Error with adding hardware", error: err.message});
     })
 
 })

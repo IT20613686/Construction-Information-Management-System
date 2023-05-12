@@ -2,38 +2,31 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
 const cors = require("cors");
+const connectDB = require("./config/db");
 const dotenv = require("dotenv");
+const userRoutes = require("./routes/userRoutes");
+const hardwareRouter = require("./routes/hardwares.js");
+const hardwareItemRouter = require("./routes/hardwareItems.js");
+const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
+
 const app = express();
-require("dotenv").config();
-
-app.use('/uploads', express.static('./uploads'));
-
-const PORT = process.env.PORT || 8070;
+dotenv.config();
+connectDB();
+app.use(express.json());
 
 app.use(cors());
 app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({ extended: true }));
 
-const URL = process.env.MONGODB_URL;
+app.use('/uploads', express.static('./uploads'));
 
-
-mongoose.connect(URL, {
-    
-    useNewUrlParser: true,
-    useUnifiedTopology:true,
-    
-});
-
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log("Mongodb connection success!");
-})
-
-const hardwareRouter = require("./routes/hardwares.js");
-const hardwareItemRouter = require("./routes/hardwareItems.js")
-
+app.use("/api/users", userRoutes);
 app.use("/hardware", hardwareRouter);
 app.use("/hardwareItem", hardwareItemRouter);
 
-app.listen(PORT, () => {
-    console.log('Server is up and running on port number:' + PORT)
-})
+app.use(notFound);
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 8070;
+
+app.listen(8070, console.log(`server started on port ${PORT}`));
