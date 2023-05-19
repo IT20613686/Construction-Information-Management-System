@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import Header from '../Header/Header'
+import AdminHeader from '../Admin Header/AdminHeader';
 import { Link } from 'react-router-dom';
 import './AddHardwareItem.css';
 import axios from 'axios'
@@ -54,7 +54,7 @@ function AddHardwareItem() {
 
   return (
     <div>
-      <Header />
+      <AdminHeader />
       <div className="body">
         <br />
         <div className="itemBtn">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import axios from 'axios';
-import Header from '../Header/Header';
+import AdminHeader from '../Admin Header/AdminHeader';
 import { Link, useNavigate } from 'react-router-dom';
 import { EditHardwareItem } from "./EditHardwareItem";
 import { ViewHardwareItemTable } from "./ViewHardwareItemTable";
@@ -102,7 +102,7 @@ function ViewHardwareItem() {
 
   return (
     <div>
-      <Header />
+      <AdminHeader />
       <div className="body">
         <br />
         <div className="hardwareBtn">

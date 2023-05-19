@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from 'react'
-import Header from '../Header/Header';
+import AdminHeader from '../Admin Header/AdminHeader';
 import { ViewHardwareReport } from './ViewHardwareReport';
 import axios from 'axios';
 import { useReactToPrint } from "react-to-print";
@@ -33,9 +33,9 @@ function HardwareReport() {
 
   return (
     <div>
-      <Header />
+      <AdminHeader />
       <div className="body">
-        <div ref={componentRef}>
+        <div ref={componentRef} className='rtb'>
           <form>
             <table className="reportTable">
               <thead>
