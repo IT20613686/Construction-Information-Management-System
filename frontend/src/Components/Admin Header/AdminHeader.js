@@ -37,13 +37,6 @@ function AdminHeader() {
 
               <NavDropdown title={userInfo?.name} id="basic-nav-dropdown">
                 <NavDropdown.Item href="/profile" style={{ color: "black" }}>
-                  <img
-                    alt=""
-                    src={`${userInfo.pic}`}
-                    width="25"
-                    height="25"
-                    style={{ marginRight: 10 }}
-                  />
                   MyProfile
                 </NavDropdown.Item>
 
