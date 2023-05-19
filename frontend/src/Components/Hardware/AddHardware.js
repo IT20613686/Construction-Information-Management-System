@@ -1,12 +1,45 @@
-import React from 'react';
-import Header from '../Header/Header';
+import React,{useState,useEffect} from 'react';
+import AdminHeader from '../Admin Header/AdminHeader';
 import './AddHardware.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 function AddHardware() {
+
+  const [hardwareName, setHardwareName] = useState("");
+  const [address, setAddress] = useState("");
+  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
+  const [image, setImage] = useState();
+
+  function sendData(e) {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("hardwareName", hardwareName);
+    formData.append("address", address);
+    formData.append("contact", contact);
+    formData.append("email", email);
+    formData.append("image", image);
+
+    axios
+      .post("http://localhost:8070/hardware/add", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then(() => {
+        alert("Hardware added successfully");
+        window.location.reload();
+      })
+      .catch((err) => {
+        alert(err);
+      });
+
+  }
   return (
     <div>
-      <Header />
+      <AdminHeader />
       <div className="body">
         <br />
         <div className="hardwareBtn">
@@ -20,9 +53,7 @@ function AddHardware() {
         <div className="container">
           <div className="form">
             <form
-              action="http://localhost:8070/hardware/add"
-              method="post"
-              encType="multipart/form-data"
+              onSubmit={sendData}
             >
               <div class="formGroup">
                 <input
@@ -33,6 +64,9 @@ function AddHardware() {
                   placeholder="Hardware Name"
                   autocomplete="off"
                   required
+                  onChange={(e) => {
+                    setHardwareName(e.target.value);
+                  }}
                 />
               </div>
               <div class="formGroup">
@@ -44,6 +78,9 @@ function AddHardware() {
                   className="addInput"
                   required
                   autocomplete="off"
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                  }}
                 />
               </div>
               <div class="formGroup">
@@ -56,6 +93,9 @@ function AddHardware() {
                   pattern="[0]{1}[0-9]{9}"
                   required
                   autocomplete="off"
+                  onChange={(e) => {
+                    setContact(e.target.value);
+                  }}
                 />
               </div>
               <div class="formGroup">
@@ -67,6 +107,9 @@ function AddHardware() {
                   placeholder="Email Address"
                   required
                   autocomplete="off"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                 />
               </div>
               <div className="imageGroup">
@@ -79,6 +122,9 @@ function AddHardware() {
                   name="image"
                   className="upload"
                   required
+                  onChange={(e) => {
+                    setImage(e.target.files[0]);
+                  }}
                 />
               </div>
               <div class="formGroup">

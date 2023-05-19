@@ -1,5 +1,5 @@
 import React, {useState,useEffect,Fragment} from 'react'
-import Header from '../Header/Header'
+import AdminHeader from '../Admin Header/AdminHeader';
 import axios from 'axios'
 import { EditHardware } from './EditHardware';
 import { ViewHardwareTable } from './ViewHardwareTable';
@@ -102,7 +102,7 @@ function ViewHardware() {
 
   return (
     <div>
-      <Header />
+      <AdminHeader />
       <div className="body">
         <br />
         <div className="hardwareBtn">
