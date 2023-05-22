@@ -1,0 +1,18 @@
+.cardImage{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 320px;
+  height: 320px;
+    
+}
+
+.card{
+    width: 320px;
+}
+
+.search-container{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
