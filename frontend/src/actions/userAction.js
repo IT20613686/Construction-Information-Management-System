@@ -39,9 +39,9 @@ export const login = (email, password) => async (dispatch) => {
     //call the user info
     localStorage.setItem("userInfo", JSON.stringify(data));
 
-    if (email == "verveadmin@gmail.com") {
+    if (email == "omcsadmin@gmail.com") {
       alert("login successfull");
-      window.location.href = "/admin-home";
+      window.location.href = "/admin-dash";
     } else {
       alert("login successfull");
       window.location.href = "/customer-home";

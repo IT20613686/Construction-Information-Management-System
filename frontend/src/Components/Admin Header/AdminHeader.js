@@ -33,7 +33,7 @@ function AdminHeader() {
         {userInfo ? (
           <>
             <Nav>
-              <Nav.Link href="/customer-home">Dashboard</Nav.Link>
+              <Nav.Link href="/admin-dash">Dashboard</Nav.Link>
 
               <NavDropdown title={userInfo?.name} id="basic-nav-dropdown">
                 <NavDropdown.Item href="/profile" style={{ color: "black" }}>
@@ -54,7 +54,7 @@ function AdminHeader() {
           <Nav>
             {" "}
             <Nav.Link>
-              <Link to="/customer-home" className="homenav-links">
+              <Link to="/admin-dash" className="homenav-links">
                 Dashboard
               </Link>
             </Nav.Link>
